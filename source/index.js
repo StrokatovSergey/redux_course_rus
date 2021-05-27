@@ -1,11 +1,16 @@
 // Core
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 // Instruments
 import './theme/init';
 
 // Intro
-import Gallery from './basic-redux';
+import App from './navigation/App';
 
-render(<Gallery />, document.getElementById('app'));
+render(
+	<BrowserRouter>
+		<App />
+	</BrowserRouter>,
+	document.getElementById('app'));
