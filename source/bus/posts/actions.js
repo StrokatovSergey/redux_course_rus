@@ -1,4 +1,4 @@
-import {CREATE_POST_ASYNC, FETCH_POSTS_ASYNC, FILL_POSTS} from './types';
+import {CREATE_POST, FETCH_POSTS_ASYNC, FILL_POSTS} from './types';
 import {api} from '../../REST';
 
 export const fillPosts = (posts) => ({
@@ -6,14 +6,20 @@ export const fillPosts = (posts) => ({
 	payload: posts
 })
 
+export const createPost = (post) => ({
+	type: CREATE_POST,
+	payload: post
+})
+
+
 export const createPostAsync = (post) => async (dispatch, getState) => {
+	dispatch({
+		type: FETCH_POSTS_ASYNC
+	})
 	api.posts.createPost(post)
 		.then( async (res) => {
 			const result = await res.json()
-			dispatch({
-				type: CREATE_POST_ASYNC,
-				payload: result.data
-			})
+			dispatch(createPost(result.data))
 		})
 		.catch((err) => console.log('err', err))
 }
