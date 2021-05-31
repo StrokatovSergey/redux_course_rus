@@ -1,4 +1,4 @@
-import {CREATE_POST, FETCH_POSTS_ASYNC, FILL_POSTS} from './types';
+import {CREATE_POST, CREATE_POST_ASYNC, FETCH_POSTS_ASYNC, FILL_POSTS} from './types';
 import {api} from '../../REST';
 
 export const fillPosts = (posts) => ({
@@ -14,7 +14,7 @@ export const createPost = (post) => ({
 
 export const createPostAsync = (post) => async (dispatch, getState) => {
 	dispatch({
-		type: FETCH_POSTS_ASYNC
+		type: CREATE_POST_ASYNC
 	})
 	api.posts.createPost(post)
 		.then( async (res) => {
