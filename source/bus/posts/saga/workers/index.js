@@ -1,0 +1,1 @@
+import {createPost} from './createPost';

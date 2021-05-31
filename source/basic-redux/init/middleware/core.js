@@ -2,6 +2,8 @@ import {applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 import {createLogger} from 'redux-logger';
 import {customThunk} from './custom';
+import createSagaMiddleware from 'redux-saga'
+import sagaMiddlewareFactory from 'redux-saga';
 
 const logger = createLogger({
 	duration: true,
@@ -15,14 +17,17 @@ const logger = createLogger({
 	}
 })
 
+const sagaMiddleware = createSagaMiddleware()
 const devtools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 const composeEnhancers = __DEV__ && devtools ? devtools : compose
 
-const middleware = [customThunk]
+const middleware = [sagaMiddleware, customThunk]
 
 if (__DEV__) {
 	middleware.push(logger)
 }
 
-export const enhancedStore = composeEnhancers(applyMiddleware(...middleware))
+const enhancedStore = composeEnhancers(applyMiddleware(...middleware))
+
+export {enhancedStore, sagaMiddleware}
 
