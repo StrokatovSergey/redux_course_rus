@@ -11,14 +11,17 @@ import { mockedProfile } from '../../instruments/mockedData';
 
 // Components
 import { Composer, Catcher, Post } from '../../components';
-import {createPostAsync, fetchPostsAsync} from '../../bus/posts/actions';
+import {postsActions} from '../../bus/posts/actions';
 
 const mapStateToProps = (state) => ({
     posts: state.posts
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    actions: bindActionCreators({fetchPostsAsync, createPostAsync}, dispatch)
+    actions: bindActionCreators({
+        fetchPostsAsync : postsActions.fetchPostsAsync,
+        createPostAsync : postsActions.createPostAsync
+    }, dispatch)
 })
 
 @connect(mapStateToProps, mapDispatchToProps)

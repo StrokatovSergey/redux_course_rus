@@ -1,29 +1,26 @@
-import {CREATE_POST, CREATE_POST_ASYNC, FETCH_POSTS_ASYNC, FILL_POSTS} from './types';
+import {types} from './types';
 import {api} from '../../REST';
 
-export const fillPosts = (posts) => ({
-	type: FILL_POSTS,
-	payload: posts
-})
-
-export const createPost = (comment) => ({
-	type: CREATE_POST,
-	payload: comment
-})
-
-
-export const createPostAsync = (post) => ({
-		type: CREATE_POST_ASYNC,
+export const postsActions = {
+	fillPosts : (posts) => ({
+		type: types.FILL_POSTS,
+		payload: posts
+	}),
+	createPost : (comment) => ({
+		type: types.CREATE_POST,
+		payload: comment
+	}),
+	createPostAsync : (post) => ({
+		type: types.CREATE_POST_ASYNC,
 		payload: post
-	})
+	}),
+	fetchPostsAsync : () => async (dispatch, getState) => {
+		dispatch({
+			type: types.FETCH_POSTS_ASYNC
+		})
+		const responce = await api.posts.fetch()
+		const result = await responce.json()
 
-
-export const fetchPostsAsync = () => async (dispatch, getState) => {
-	dispatch({
-		type: FETCH_POSTS_ASYNC
-	})
-	const responce = await api.posts.fetch()
-	const result = await responce.json()
-
-	dispatch(fillPosts(result.data))
+		dispatch(postsActions.fillPosts(result.data))
+	}
 }
