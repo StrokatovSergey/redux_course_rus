@@ -6,23 +6,17 @@ export const fillPosts = (posts) => ({
 	payload: posts
 })
 
-export const createPost = (post) => ({
+export const createPost = (comment) => ({
 	type: CREATE_POST,
-	payload: post
+	payload: comment
 })
 
 
-export const createPostAsync = (post) => async (dispatch, getState) => {
-	dispatch({
-		type: CREATE_POST_ASYNC
+export const createPostAsync = (post) => ({
+		type: CREATE_POST_ASYNC,
+		payload: post
 	})
-	api.posts.createPost(post)
-		.then( async (res) => {
-			const result = await res.json()
-			dispatch(createPost(result.data))
-		})
-		.catch((err) => console.log('err', err))
-}
+
 
 export const fetchPostsAsync = () => async (dispatch, getState) => {
 	dispatch({
