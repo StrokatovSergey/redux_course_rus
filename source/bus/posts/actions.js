@@ -14,13 +14,7 @@ export const postsActions = {
 		type: types.CREATE_POST_ASYNC,
 		payload: post
 	}),
-	fetchPostsAsync : () => async (dispatch, getState) => {
-		dispatch({
-			type: types.FETCH_POSTS_ASYNC
-		})
-		const responce = await api.posts.fetch()
-		const result = await responce.json()
-
-		dispatch(postsActions.fillPosts(result.data))
-	}
+	fetchPostsAsync : () => ({
+		type: types.FETCH_POSTS_ASYNC
+	})
 }

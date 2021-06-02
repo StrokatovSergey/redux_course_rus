@@ -47,7 +47,6 @@ export default class Posts extends Component {
 
     componentDidMount () {
         const { actions } = this.props;
-            // console.log('this.props', this.props);
         actions.fetchPostsAsync();
     }
 
