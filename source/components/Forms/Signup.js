@@ -6,15 +6,19 @@ import cx from 'classnames';
 // Instruments
 import Styles from './styles.m.css';
 import { signup } from '../../bus/forms/shapes';
+import { authActions } from '../../bus/auth/actions';
+import {connect} from 'react-redux';
 
+const mapStateToProps = (state) => ({
+    isFetching: state.ui.get('isFetching')
+})
+
+const mapDispatchToProps = {
+    signupAsync: authActions.signupAsync
+}
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class SignupForm extends Component {
-    static defaultProps = {
-        // State
-        isFetching: false,
-
-        // Actions
-        signupAsync: () => {},
-    };
 
     _submitSignupForm = (user) => {
         this.props.signupAsync(user);

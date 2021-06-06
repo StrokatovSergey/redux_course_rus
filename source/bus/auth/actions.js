@@ -1,11 +1,11 @@
 import {types} from './types';
 
-export const authAction = {
+export const authActions = {
 	authenticate: () => ({
 		type : types.AUTHENTICATE
 	}),
 	signupAsync: (userData) => ({
-		types: types.SIGNUP_ASYNC,
+		type: types.SIGNUP_ASYNC,
 		payload: userData
 	})
 }
