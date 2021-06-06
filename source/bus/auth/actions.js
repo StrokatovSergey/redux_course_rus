@@ -1,6 +1,9 @@
 import {types} from './types';
 
 export const authActions = {
+	initialize: () => ({
+		type : types.INITIALIZE
+	}),
 	authenticate: () => ({
 		type : types.AUTHENTICATE
 	}),
@@ -11,5 +14,11 @@ export const authActions = {
 	loginAsync: loginData => ({
 		type: types.LOGIN_ASYNC,
 		payload: loginData
-	})
+	}),
+	authenticateAsync: () => ({
+		type : types.AUTHENTICATE_ASYNC
+	}),
+	initializeAsync: () => ({
+		type : types.INITIALIZE_ASYNC
+	}),
 }

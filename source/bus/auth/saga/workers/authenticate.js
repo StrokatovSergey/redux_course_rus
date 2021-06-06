@@ -4,10 +4,10 @@ import {api} from '../../../../REST';
 import {authActions} from '../../actions';
 import {profileActions} from '../../../profile/actions';
 
-export function* login({payload: loginInfo}) {
+export function* authenticate() {
 	try {
 		yield put(uiActions.startFetching())
-		const response = yield apply(api, api.auth.login, [loginInfo])
+		const response = yield apply(api, api.auth.authenticate)
 
 		const { data : profile, message } = yield apply(response, response.json)
 		if (response.status !== 200) {
@@ -19,10 +19,11 @@ export function* login({payload: loginInfo}) {
 		yield apply(localStorage, localStorage.setItem, ['token', profile.token])
 
 	} catch (err) {
-		console.log('login worker' , err);
-		yield put(uiActions.emitError(err, 'login worker'))
+		console.log('authenticate worker' , err);
+		yield put(uiActions.emitError(err, 'authenticate worker'))
 	} finally {
 		yield put(uiActions.stopFetching())
+		yield put(authActions.initialize())
 	}
 
 }
