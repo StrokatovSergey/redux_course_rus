@@ -14,6 +14,11 @@ export function* login({payload: loginInfo}) {
 			throw new Error(message)
 		}
 
+		if (loginInfo.remember) {
+		    yield apply(localStorage, localStorage.setItem, ['remember', true])
+		}
+
+
 		yield put(profileActions.fillProfile(profile))
 		yield put(authActions.authenticate())
 		yield apply(localStorage, localStorage.setItem, ['token', profile.token])
