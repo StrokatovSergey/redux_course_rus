@@ -6,6 +6,21 @@ import cx from 'classnames';
 // Instruments
 import Styles from './styles.m.css';
 import { login } from '../../bus/forms/shapes';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {authActions} from '../../bus/auth/actions';
+
+const mapDispatchToProps = (dispatch) => ({
+    actions: bindActionCreators({
+        loginAsync : authActions.loginAsync,
+    }, dispatch)
+})
+
+const mapStateToProps = (state) => ({
+    ui: state.ui
+})
+
+@connect(mapStateToProps, mapDispatchToProps)
 
 export default class LoginForm extends Component {
     static defaultProps = {
@@ -17,7 +32,7 @@ export default class LoginForm extends Component {
     };
 
     _submitLoginForm = (credentials) => {
-        this.props.loginAsync(credentials);
+        this.props.actions.loginAsync(credentials);
     };
 
     render () {
