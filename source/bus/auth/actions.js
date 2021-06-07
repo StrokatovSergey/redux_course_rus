@@ -1,6 +1,9 @@
 import {types} from './types';
 
 export const authActions = {
+	logout: () => ({
+		type: types.LOGOUT
+	}),
 	initialize: () => ({
 		type : types.INITIALIZE
 	}),
@@ -20,5 +23,8 @@ export const authActions = {
 	}),
 	initializeAsync: () => ({
 		type : types.INITIALIZE_ASYNC
+	}),
+	logoutAsync: () => ({
+		type: types.LOGOUT_ASYNC
 	}),
 }
