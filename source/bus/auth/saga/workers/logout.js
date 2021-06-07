@@ -1,9 +1,11 @@
 import {apply, put} from 'redux-saga/effects';
+import {replace} from 'react-router-redux';
 import {uiActions} from '../../../ui/actions';
 import {api} from '../../../../REST';
 import {authActions} from '../../actions';
 import {profileActions} from '../../../profile/actions';
 import {postsActions} from '../../../posts/actions';
+import { book } from '../../../../navigation/book';
 
 export function* logout() {
 	try {
@@ -23,6 +25,7 @@ export function* logout() {
 		yield put(profileActions.clearProfile())
 		yield put(uiActions.stopFetching())
 		yield put(authActions.logout())
+		yield put(replace(book.login))
 	}
 
 }
