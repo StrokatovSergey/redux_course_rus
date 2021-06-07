@@ -1,6 +1,10 @@
 import {types} from './types';
 
 export const postsActions = {
+	removePost : (postId) => ({
+		type: types.REMOVE_POST,
+		payload: postId
+	}),
 	fillPosts : (posts) => ({
 		type: types.FILL_POSTS,
 		payload: posts
@@ -21,5 +25,9 @@ export const postsActions = {
 	}),
 	clearPostsAsync : () => ({
 		type: types.CLEAR_POSTS_ASYNC
+	}),
+	removePostAsync : (postId) => ({
+		type: types.REMOVE_POST_ASYNC,
+		payload: postId
 	}),
 }

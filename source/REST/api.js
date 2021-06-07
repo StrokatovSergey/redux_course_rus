@@ -59,6 +59,14 @@ export const api = {
 				},
 				body: JSON.stringify({comment: postText})
 			})
+		},
+		removePost (postId) {
+			return fetch(`${MAIN_URL}/feed/${postId}`, {
+				method: 'DELETE',
+				headers: {
+					Authorization: this.token
+				}
+			})
 		}
 	}
 }
