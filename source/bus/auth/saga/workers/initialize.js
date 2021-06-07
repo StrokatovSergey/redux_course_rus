@@ -5,7 +5,7 @@ export function* initialize() {
 	const token = yield apply(localStorage, localStorage.getItem, ['token'])
 	const remember = yield apply(localStorage, localStorage.getItem, ['remember'])
 
-	if (token && remember) {
+	if (token && JSON.parse(remember)) {
 	   yield put(authActions.authenticateAsync())
 	} else {
 		yield put(authActions.initialize())
