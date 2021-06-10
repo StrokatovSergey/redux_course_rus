@@ -1,6 +1,10 @@
 import {types} from './types';
 
 export const postsActions = {
+	likePost : (likedPostData) => ({
+		type: types.LIKE_POST,
+		payload: likedPostData
+	}),
 	removePost : (postId) => ({
 		type: types.REMOVE_POST,
 		payload: postId
@@ -28,6 +32,10 @@ export const postsActions = {
 	}),
 	removePostAsync : (postId) => ({
 		type: types.REMOVE_POST_ASYNC,
+		payload: postId
+	}),
+	likePostAsync : (postId) => ({
+		type: types.LIKE_POST_ASYNC,
 		payload: postId
 	}),
 }

@@ -5,6 +5,7 @@ import {types} from '../types';
 import {createPost} from './workers/createPost';
 import {fetchPosts} from './workers/fetchPosts';
 import {removePost} from './workers/removePost';
+import {likePost} from './workers/likePost';
 
 export function* watchCreatePost() {
 	yield takeEvery(types.CREATE_POST_ASYNC, createPost)
@@ -17,7 +18,10 @@ export function* watchFetchPosts() {
 export function* watchRemovePost() {
 	yield takeEvery(types.REMOVE_POST_ASYNC, removePost)
 }
+export function* watchLikePost() {
+	yield takeEvery(types.LIKE_POST_ASYNC, likePost)
+}
 
 export function* watchPosts() {
-	yield all([call(watchCreatePost), call(watchFetchPosts), call(watchRemovePost)])
+	yield all([call(watchCreatePost), call(watchFetchPosts), call(watchRemovePost), call(watchLikePost)])
 }

@@ -9,7 +9,8 @@ export function* removePost({payload: postId}) {
 
 		const response = yield apply(api, api.posts.removePost, [postId])
 		if (response.status !== 204) {
-		    throw new Error()
+			const { message } = yield apply(response, response.json)
+			throw new Error(message)
 		}
 		yield put(postsActions.removePost(postId))
 
