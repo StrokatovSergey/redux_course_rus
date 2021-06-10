@@ -5,6 +5,10 @@ export const postsActions = {
 		type: types.LIKE_POST,
 		payload: likedPostData
 	}),
+	unlikePost : (likedPostData) => ({
+		type: types.UNLIKE_POST,
+		payload: likedPostData
+	}),
 	removePost : (postId) => ({
 		type: types.REMOVE_POST,
 		payload: postId
@@ -36,6 +40,10 @@ export const postsActions = {
 	}),
 	likePostAsync : (postId) => ({
 		type: types.LIKE_POST_ASYNC,
+		payload: postId
+	}),
+	unlikePostAsync  : (postId) => ({
+		type: types.UNLIKE_POST_ASYNC,
 		payload: postId
 	}),
 }

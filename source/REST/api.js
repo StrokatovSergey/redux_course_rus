@@ -68,7 +68,7 @@ export const api = {
 				}
 			})
 		},
-		like (postId) {
+		likeOrUnlike (postId) {
 			return fetch(`${MAIN_URL}/feed/like/${postId}`, {
 				method: 'PUT',
 				headers: {

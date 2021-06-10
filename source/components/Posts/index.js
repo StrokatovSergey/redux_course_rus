@@ -24,6 +24,7 @@ const mapDispatchToProps = (dispatch) => ({
         createPostAsync : postsActions.createPostAsync,
         removePostAsync : postsActions.removePostAsync,
         likePostAsync : postsActions.likePostAsync,
+        unlikePostAsync  : postsActions.unlikePostAsync ,
     }, dispatch)
 })
 

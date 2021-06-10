@@ -22,6 +22,10 @@ export const postsReducer = (state = initialState, action) => {
 			return state.updateIn([state.findIndex(post => post.get('id') === action.payload.postId), 'likes'],
 	 likes => likes.unshift(action.payload.liker))
 
+		case types.UNLIKE_POST:
+			return state.updateIn([state.findIndex(post => post.get('id') === action.payload.postId), 'likes'],
+	 likes => likes.filter(like => action.payload.liker.postId !== like.id ))
+
 		default:
 			return state
 	}

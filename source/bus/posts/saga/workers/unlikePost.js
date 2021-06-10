@@ -3,7 +3,7 @@ import {postsActions} from '../../actions';
 import {put, apply, select} from 'redux-saga/effects';
 import {uiActions} from '../../../ui/actions';
 
-export function* likePost({payload: postId}) {
+export function* unlikePost({payload: postId}) {
 	try {
 		yield put(uiActions.startFetching())
 
@@ -15,11 +15,11 @@ export function* likePost({payload: postId}) {
 
 		const liker = yield select(state => state.profile.removeAll(['avatar', 'token']))
 
-		yield put(postsActions.likePost({ postId, liker }))
+		yield put(postsActions.unlikePost({ postId, liker }))
 
 	} catch (err) {
-		console.log('likePost worker' , err);
-		yield put(uiActions.emitError(err, 'likePost worker'))
+		console.log('unlikePost worker' , err);
+		yield put(uiActions.emitError(err, 'unlikePost worker'))
 	} finally {
 		yield put(uiActions.stopFetching())
 	}
