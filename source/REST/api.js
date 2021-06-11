@@ -1,8 +1,9 @@
 import {groupId, MAIN_URL} from './config';
+import {store} from '../basic-redux/init/store';
 
 export const api = {
 	get token () {
-		return localStorage.getItem('token')
+		return localStorage.getItem('token') || store.getState().profile.toJS().token
 	},
 	auth: {
 		signup (userInfo) {
