@@ -16,8 +16,6 @@ export const api = {
 	},
 	auth: {
 		authenticate () {
-			console.log(' auth authenticate', this);
-			console.log(' auth authenticate this.token', getToken());
 			return fetch(`${MAIN_URL}/user/login`, {
 				method: 'POST',
 				headers: {
