@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
+import {socketActions} from '../bus/socket/actions';
+import {authActions} from '../bus/auth/actions';
+import {socket, joinSocketChannel} from '../basic-redux/init/socket';
 
 
 // Pages
 import Private from './Private';
 import Public from './Public';
-import {authActions} from '../bus/auth/actions';
 import {Loading} from '../components';
 
 const mapStateToProps = (state) => ({
@@ -17,7 +19,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-    initializeAsync: authActions.initializeAsync
+    initializeAsync: authActions.initializeAsync,
+    ...socketActions
 }
 
 @hot(module)
@@ -26,7 +29,15 @@ const mapDispatchToProps = {
 
 export default class App extends Component {
     componentDidMount() {
-        this.props.initializeAsync()
+        const {listenConnection, initializeAsync} = this.props
+        listenConnection()
+        initializeAsync()
+        joinSocketChannel()
+    }
+
+    componentWillUnmount() {
+        socket.removeListener('connect')
+        socket.removeListener('disconnect')
     }
 
     render () {
