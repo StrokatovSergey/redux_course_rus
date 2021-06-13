@@ -1,11 +1,31 @@
 import {groupId, MAIN_URL} from './config';
 import {store} from '../basic-redux/init/store';
 
+const getToken = () => localStorage.getItem('token') || store.getState().profile.toJS().token
+
 export const api = {
-	get token () {
-		return localStorage.getItem('token') || store.getState().profile.toJS().token
+	users: {
+		fetch() {
+			return fetch(`${MAIN_URL}/user/all`, {
+				method:  'GET',
+				headers: {
+					Authorization: getToken()
+				}
+			})
+		}
 	},
 	auth: {
+		authenticate () {
+			console.log(' auth authenticate', this);
+			console.log(' auth authenticate this.token', getToken());
+			return fetch(`${MAIN_URL}/user/login`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({token : getToken()})
+			})
+		},
 		signup (userInfo) {
 			return fetch(`${MAIN_URL}/user/${groupId}`, {
 				method: 'POST',
@@ -28,17 +48,8 @@ export const api = {
 			return fetch(`${MAIN_URL}/user/logout`, {
 				method: 'GET',
 				headers: {
-					Authorization: this.token
+					Authorization: getToken()
 				}
-			})
-		},
-		authenticate () {
-			return fetch(`${MAIN_URL}/user/login`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({token : this.token})
 			})
 		}
 	},
@@ -47,7 +58,7 @@ export const api = {
 			return fetch(`${MAIN_URL}/feed`, {
 				method: 'GET',
 				headers: {
-					Authorization: this.token
+					Authorization: getToken()
 				}
 			})
 		},
@@ -55,7 +66,7 @@ export const api = {
 			return fetch(`${MAIN_URL}/feed`, {
 				method: 'POST',
 				headers: {
-					Authorization: this.token,
+					Authorization: getToken(),
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({comment: postText})
@@ -65,7 +76,7 @@ export const api = {
 			return fetch(`${MAIN_URL}/feed/${postId}`, {
 				method: 'DELETE',
 				headers: {
-					Authorization: this.token
+					Authorization: getToken()
 				}
 			})
 		},
@@ -73,9 +84,10 @@ export const api = {
 			return fetch(`${MAIN_URL}/feed/like/${postId}`, {
 				method: 'PUT',
 				headers: {
-					Authorization: this.token
+					Authorization: getToken()
 				}
 			})
 		}
-	}
+	},
+
 }
