@@ -12,6 +12,7 @@ import {socket, joinSocketChannel} from '../basic-redux/init/socket';
 import Private from './Private';
 import Public from './Public';
 import {Loading} from '../components';
+import {api} from '../REST/api';
 
 const mapStateToProps = (state) => ({
     isAuthenticated: state.auth.get('isAuthenticated'),
@@ -41,13 +42,13 @@ export default class App extends Component {
     }
 
     render () {
-        const { isAuthenticated, isInitialized } = this.props
+        const { isAuthenticated, isInitialized, listenPosts } = this.props
 
         if (!isInitialized) {
             return <Loading/>
         }
 
-        return isAuthenticated ? <Private/> : <Public/>
+        return isAuthenticated ? <Private listenPosts={listenPosts}/> : <Public/>
 
     }
 }
