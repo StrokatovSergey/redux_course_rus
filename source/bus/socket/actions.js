@@ -1,6 +1,7 @@
 import { socket } from '../../basic-redux/init/socket';
 import { uiActions } from '../ui/actions';
 import {postsActions} from '../posts/actions';
+import {store} from '../../basic-redux/init/store';
 
 export const socketActions = {
 	listenConnection: () => dispatch => {
@@ -12,10 +13,22 @@ export const socketActions = {
 			dispatch(uiActions.setOfflineState())
 		});
 	},
-	listenPosts: () => dispatch => {
+	listenPosts: () => (dispatch, getState) => {
 		socket.on('create', event => {
+			// console.log('eventeventeventevent', event);
 			const {data: post} = JSON.parse(event)
 			dispatch(postsActions.createPost(post))
+		})
+
+		socket.on('like', event => {
+			const {data, meta} = JSON.parse(event)
+			const liker = getState().users.find(user => user.get('id') === data.userId).delete('avatar')
+			if (meta.action === 'like') {
+			   dispatch( postsActions.likePost({postId: data.postId, liker}))
+			} else {
+				dispatch(postsActions.unlikePost({postId: data.postId, liker}))
+			}
+
 		})
 	}
 }

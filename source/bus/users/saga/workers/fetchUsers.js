@@ -12,8 +12,6 @@ export function* fetchUsers() {
 		if (response.status !== 200) {
 			throw new Error(message)
 		}
-		
-		console.log('usersusers', users);
 
 		yield put(usersActions.fillUsers(users))
 
