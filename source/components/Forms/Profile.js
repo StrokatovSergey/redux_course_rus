@@ -12,13 +12,16 @@ import { book } from '../../navigation/book';
 
 // Components
 import { Input } from '../../components';
+import {connect} from 'react-redux';
 
+const mapStateToProps = (state) => ({
+    profile: state.profile
+})
+
+
+@connect(mapStateToProps)
 export default class Profile extends Component {
     static defaultProps = {
-        // State
-        isFetching: false,
-        profile:    Map(),
-
         // Actions
         updateNameAsync:   () => {},
         updateAvatarAsync: () => {},

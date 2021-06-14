@@ -3,6 +3,7 @@ import {uiActions} from '../../../ui/actions';
 import {api} from '../../../../REST';
 import {authActions} from '../../actions';
 import {profileActions} from '../../../profile/actions';
+import {actions} from 'react-redux-form';
 
 export function* authenticate() {
 	try {
@@ -19,9 +20,11 @@ export function* authenticate() {
 			throw new Error(message)
 		}
 
+		yield apply(localStorage, localStorage.setItem, ['token', profile.token])
+		yield put(actions.change('forms.user.profile.firstName', profile.firstName))
+		yield put(actions.change('forms.user.profile.lastName', profile.lastName))
 		yield put(profileActions.fillProfile(profile))
 		yield put(authActions.authenticate())
-		yield apply(localStorage, localStorage.setItem, ['token', profile.token])
 
 	} catch (err) {
 		console.log('authenticate worker' , err);
