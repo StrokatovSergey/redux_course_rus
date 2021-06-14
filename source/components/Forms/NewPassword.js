@@ -8,15 +8,14 @@ import cx from 'classnames';
 import Styles from './styles.m.css';
 import { newPassword } from '../../bus/forms/shapes';
 import { book } from '../../navigation/book';
+import {profileActions} from '../../bus/profile/actions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
+const mapDispatchToProps = (dispatch) => ({...bindActionCreators(profileActions, dispatch)})
+
+@connect(null, mapDispatchToProps)
 export default class NewPassword extends Component {
-    static defaultProps = {
-        // State
-        isFetching: false,
-
-        // Actions
-        updatePasswordAsync: () => {},
-    };
 
     _submitPassword = (passwordData) => {
         const { updatePasswordAsync } = this.props;
@@ -69,8 +68,7 @@ export default class NewPassword extends Component {
                                     <button
                                         className = { buttonStyle }
                                         disabled = { isFetching }
-                                        type = 'submit'
-                                        onClick = { this._changePassword }>
+                                        type = 'submit'>
                                         {buttonMessage}
                                     </button>
                                 </div>
@@ -81,7 +79,7 @@ export default class NewPassword extends Component {
                 } }
                 validationSchema = { newPassword.schema }
                 onSubmit = { this._submitPassword }
-            />
+                />
         );
     }
 }

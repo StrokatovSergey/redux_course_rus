@@ -22,4 +22,8 @@ export const profileActions = {
 		type : types.UPDATE_AVATAR_ASYNC,
 		payload: newAvatarUrl
 	}),
+	updatePasswordAsync: (passwordData) => ({
+		type : types.UPDATE_PASSWORD_ASYNC,
+		payload: passwordData
+	}),
 }
