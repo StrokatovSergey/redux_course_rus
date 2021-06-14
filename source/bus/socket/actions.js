@@ -15,7 +15,6 @@ export const socketActions = {
 	},
 	listenPosts: () => (dispatch, getState) => {
 		socket.on('create', event => {
-			// console.log('eventeventeventevent', event);
 			const {data: post} = JSON.parse(event)
 			dispatch(postsActions.createPost(post))
 		})
@@ -28,7 +27,11 @@ export const socketActions = {
 			} else {
 				dispatch(postsActions.unlikePost({postId: data.postId, liker}))
 			}
+		})
 
+		socket.on('remove', event => {
+			const { data: postId } = JSON.parse(event)
+			dispatch(postsActions.removePost(postId))
 		})
 	}
 }
