@@ -8,9 +8,18 @@ export const profileActions = {
 	clearProfile: () => ({
 		type : types.CLEAR_PROFILE,
 	}),
+	updateAvatar: (newAvatarUrl) => ({
+		type : types.UPDATE_AVATAR,
+		payload: newAvatarUrl
+	}),
+
 
 	updateNameAsync: (newName) => ({
 		type : types.UPDATE_NAME_ASYNC,
 		payload: newName
-	})
+	}),
+	updateAvatarAsync: (newAvatarUrl) => ({
+		type : types.UPDATE_AVATAR_ASYNC,
+		payload: newAvatarUrl
+	}),
 }
