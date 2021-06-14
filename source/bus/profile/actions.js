@@ -7,5 +7,10 @@ export const profileActions = {
 	}),
 	clearProfile: () => ({
 		type : types.CLEAR_PROFILE,
+	}),
+
+	updateNameAsync: (newName) => ({
+		type : types.UPDATE_NAME_ASYNC,
+		payload: newName
 	})
 }

@@ -14,6 +14,18 @@ export const api = {
 			})
 		}
 	},
+	profile: {
+		updateProfile(profileInfo) {
+			return fetch(`${MAIN_URL}/user`, {
+				method:  'PUT',
+				headers: {
+					Authorization: getToken(),
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(profileInfo)
+			})
+		}
+	},
 	auth: {
 		authenticate () {
 			return fetch(`${MAIN_URL}/user/login`, {

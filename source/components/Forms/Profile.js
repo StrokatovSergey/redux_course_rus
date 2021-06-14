@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Form, Control } from 'react-redux-form';
 import cx from 'classnames';
 import { Map } from 'immutable';
+import {profileActions} from '../../bus/profile/actions';
+import {connect} from 'react-redux';
 
 // Instruments
 import Styles from './styles.m.css';
@@ -12,18 +14,19 @@ import { book } from '../../navigation/book';
 
 // Components
 import { Input } from '../../components';
-import {connect} from 'react-redux';
+
 
 const mapStateToProps = (state) => ({
     profile: state.profile
 })
 
+const mapDispatchToProps = profileActions
 
-@connect(mapStateToProps)
+
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Profile extends Component {
     static defaultProps = {
         // Actions
-        updateNameAsync:   () => {},
         updateAvatarAsync: () => {},
     };
 
