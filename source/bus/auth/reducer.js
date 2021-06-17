@@ -7,7 +7,7 @@ const initialState = Map({
 })
 
 export const authReducer = (state = initialState, action) => {
-	switch (action.type) {
+    switch (action.type) {
 		case types.INITIALIZE:
 			return state.set('isInitialized', true);
 
