@@ -1,7 +1,7 @@
 // Core
 import React, { Component } from 'react';
 import {Redirect, Route, Switch} from 'react-router-dom';
-import {socket} from '../basic-redux/init/socket';
+import {socket} from '../init/socket';
 
 // Pages
 import { Login, Signup, Feed, Profile, NewPassword } from '../pages';

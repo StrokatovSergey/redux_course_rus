@@ -5,7 +5,7 @@ import cx from 'classnames'
 
 // Instruments
 import Styles from './styles.m.css';
-import {store} from '../../init/store';
+import {store} from '../../../init/store';
 import {showNextPhoto, showPreviousPhoto, showSelectedPhoto} from '../../bus/gallery/actions';
 
 @hot(module)

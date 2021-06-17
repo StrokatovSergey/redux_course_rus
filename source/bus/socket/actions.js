@@ -1,7 +1,7 @@
-import { socket } from '../../basic-redux/init/socket';
+import { socket } from '../../init/socket';
 import { uiActions } from '../ui/actions';
 import {postsActions} from '../posts/actions';
-import {store} from '../../basic-redux/init/store';
+import {store} from '../../init/store';
 
 export const socketActions = {
 	listenConnection: () => dispatch => {

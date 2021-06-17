@@ -8,8 +8,8 @@ import './theme/init';
 
 import App from './navigation/App';
 import {Provider} from 'react-redux';
-import {store} from './basic-redux/init/store';
-import {history} from './basic-redux/init/middleware/core';
+import {store} from './init/store';
+import {history} from './init/middleware/core';
 
 render(
 	<Provider store={store}>

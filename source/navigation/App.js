@@ -5,7 +5,7 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {socketActions} from '../bus/socket/actions';
 import {authActions} from '../bus/auth/actions';
-import {socket, joinSocketChannel} from '../basic-redux/init/socket';
+import {socket, joinSocketChannel} from '../init/socket';
 
 
 // Pages

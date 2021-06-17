@@ -1,5 +1,5 @@
 import {groupId, MAIN_URL} from './config';
-import {store} from '../basic-redux/init/store';
+import {store} from '../init/store';
 
 const getToken = () => localStorage.getItem('token') || store.getState().profile.toJS().token
 
