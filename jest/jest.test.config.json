@@ -12,6 +12,7 @@
     "collectCoverageFrom": [
         "<rootDir>/source/bus/auth/**/*.{js,jsx}",
         "<rootDir>/source/bus/ui/**/*.{js,jsx}",
+        "<rootDir>/source/bus/ui/**/*.{js,jsx}",
         "<rootDir>/source/bus/profile/**/*.{js,jsx}",
         "<rootDir>/source/init/store.js"
     ],
