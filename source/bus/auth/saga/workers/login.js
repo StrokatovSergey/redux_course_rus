@@ -4,6 +4,7 @@ import {api} from '../../../../REST';
 import {authActions} from '../../actions';
 import {profileActions} from '../../../profile/actions';
 import {actions} from 'react-redux-form';
+import {notificationActions} from '../../../notification/actions';
 
 export function* login({payload: loginInfo}) {
 	try {
@@ -22,10 +23,12 @@ export function* login({payload: loginInfo}) {
 		yield put(actions.change('forms.user.profile.lastName', profile.lastName))
 		yield put(authActions.authenticate())
 		yield apply(localStorage, localStorage.setItem, ['token', profile.token])
+		yield put(notificationActions.showNotification('welcome to the club, buddy' ))
 
 	} catch (err) {
 		console.log('login worker' , err);
 		yield put(uiActions.emitError(err, 'login worker'))
+		yield put(notificationActions.showNotification('wrong data', 'error', 'login' ))
 	} finally {
 		yield put(uiActions.stopFetching())
 	}

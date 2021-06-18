@@ -1,7 +1,7 @@
 import {apply, put, select} from 'redux-saga/effects';
 import {uiActions} from '../../../ui/actions';
 import {api} from '../../../../REST';
-import {authActions} from '../../../auth/actions';
+import {notificationActions} from '../../../notification/actions';
 
 export function* updatePassword({ payload: { newPassword, oldPassword }}) {
 	const profile = yield select(state => state.profile.merge({ newPassword, oldPassword }))
@@ -14,11 +14,13 @@ export function* updatePassword({ payload: { newPassword, oldPassword }}) {
 			throw new Error(message)
 		}
 
-		yield put(authActions.logout())
+		yield put(notificationActions.showNotification('Password changed successfully' ))
 
 	} catch (err) {
 		console.log('updatePassword worker' , err);
 		yield put(uiActions.emitError(err, 'updatePassword worker'))
+		yield put(notificationActions.showNotification('wrong password', 'error', 'change password' ))
+
 	} finally {
 		yield put(uiActions.stopFetching())
 	}

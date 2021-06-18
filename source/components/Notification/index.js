@@ -7,15 +7,15 @@ import { Map } from 'immutable';
 
 // Instruments
 import Styles from './styles.m.css';
+import {connect} from 'react-redux';
+import {notificationActions} from '../../bus/notification/actions';
 
+const mapStateToProps = state => ({
+    notification : state.notification
+})
+
+@connect(mapStateToProps, notificationActions)
 export default class Notification extends Component {
-    static defaultProps = {
-        // State
-        notification: Map(),
-
-        // Actions:
-        hideNotification: () => {},
-    };
 
     state = {
         notificationIn: true,
