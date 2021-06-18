@@ -34,6 +34,18 @@ const users = [
     }
 ]
 
+const newName = {
+    firstName: 'Mister',
+    lastName: 'Twister'
+};
+
+const newAvatar = ['avatar'];
+
+const password = {
+    oldPassword: 12345,
+    newPassword: 1234567
+}
+
 const userProfile = {
     id:        'TEST_ID',
     avatar:    'TEST_AVATAR',
@@ -86,7 +98,10 @@ global.__ = {
     fetchResponseFail400,
     credentials,
     url,
-    users
+    users,
+    newName,
+    newAvatar,
+    password
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();
