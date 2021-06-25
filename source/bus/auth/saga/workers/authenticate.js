@@ -15,7 +15,7 @@ export function* authenticate() {
 			if (response.status === 401) {
 				yield apply(localStorage, localStorage.removeItem, ['token'])
 				yield apply(localStorage, localStorage.removeItem, ['remember'])
-				return
+				return null
 			}
 			throw new Error(message)
 		}
