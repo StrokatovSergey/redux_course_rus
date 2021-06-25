@@ -6,6 +6,7 @@ import { authActions } from "../actions";
 import { uiActions } from "../../ui/actions";
 import { profileActions } from "../../profile/actions";
 import { signup } from "../saga/workers/signup";
+import {usersActions} from '../../users/actions';
 
 const signupAction = authActions.signupAsync(__.userProfile);
 
@@ -24,47 +25,27 @@ describe("signup saga", () => {
       );
       clone = saga.clone();
     });
-
   });
 
   describe("should success response", () => {
     it("should get a Success request", function() {
-      expect(saga.next(__.fetchResponseSuccess).value).toEqual(
-        apply(__.fetchResponseSuccess, __.fetchResponseSuccess.json)
-      );
+      expect(saga.next(__.fetchResponseSuccess).value).toEqual(apply(__.fetchResponseSuccess, __.fetchResponseSuccess.json))
     });
 
     it("should dispatch fillProfile action Snapshot", function() {
-      expect(saga.next(__.responseDataSuccess).value).toMatchInlineSnapshot(`
-Object {
-  "@@redux-saga/IO": true,
-  "PUT": Object {
-    "action": Object {
-      "payload": Object {
-        "avatar": "TEST_AVATAR",
-        "firstName": "Walter",
-        "id": "TEST_ID",
-        "lastName": "White",
-        "token": "TEST_TOKEN",
-      },
-      "type": "FILL_PROFILE",
-    },
-    "channel": null,
-  },
-}
-`);
+      expect(saga.next(__.responseDataSuccess).value).toEqual(put(profileActions.fillProfile(__.userProfile)));
     });
 
     it("should dispatch authenticate action", function() {
       expect(saga.next().value).toEqual(put(authActions.authenticate()));
     });
 
-    it('should stop fetching in success', function() {
-    	expect(saga.next().value).toEqual(put(uiActions.stopFetching()))
+    it("should stop fetching in success", function() {
+      expect(saga.next().value).toEqual(put(uiActions.stopFetching()));
     });
 
-    it('should finish saga  in success', function() {
-    	expect(saga.next().done).toEqual(true)
+    it("should finish saga  in success", function() {
+      expect(saga.next().done).toEqual(true);
     });
   });
 

@@ -60,13 +60,15 @@ const credentials = {
     remember: true,
 };
 
-const responseDataSuccess = {
-    data:    userProfile,
-    message: successMesasge,
-};
+
 
 const responseDataFail = {
     message: errorMessage,
+};
+
+const responseDataSuccess = {
+    data:    userProfile,
+    message: successMesasge,
 };
 
 const fetchResponseSuccess = {
@@ -83,6 +85,19 @@ const fetchResponseFail400 = {
     status: 400,
     json:   jest.fn(() => Promise.resolve(responseDataFail)),
 };
+
+
+
+const responseUsersDataSuccess = {
+    data: users,
+    message: successMesasge,
+};
+
+const fetchUsersResponseSuccess = {
+    status: 200,
+    json:   jest.fn(() => Promise.resolve(responseUsersDataSuccess)),
+};
+
 
 const url = 'https://www.url.com';
 
@@ -101,7 +116,9 @@ global.__ = {
     users,
     newName,
     newAvatar,
-    password
+    password,
+    fetchUsersResponseSuccess,
+    responseUsersDataSuccess
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();
