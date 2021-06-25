@@ -76,6 +76,11 @@ const fetchResponseSuccess = {
     json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
 };
 
+const fetchResponseSuccess204 = {
+    status: 204,
+    json:   jest.fn(() => Promise.resolve(responseDataSuccess)),
+};
+
 const fetchResponseFail401 = {
     status: 401,
     json:   jest.fn(() => Promise.resolve(responseDataFail)),
@@ -118,7 +123,8 @@ global.__ = {
     newAvatar,
     password,
     fetchUsersResponseSuccess,
-    responseUsersDataSuccess
+    responseUsersDataSuccess,
+    fetchResponseSuccess204
 };
 global.fetch = fetch;
 global.localStorage = new LocalStorage();

@@ -34,11 +34,11 @@ describe("authenticate saga test", () => {
 			.run()
 	})
 
-	it("should complete a 401 status response scenario", async () => {
+	it("should complete a 400 status response scenario", async () => {
 		await expectSaga(authenticate)
 			.put(uiActions.startFetching())
 			.provide([[apply(api, api.auth.authenticate ), __.fetchResponseFail400]])
-			.put(uiActions.emitError(__.fetchResponseFail400, 'authenticate worker'))
+			.put(uiActions.emitError(__.error, 'authenticate worker'))
 			.put(uiActions.stopFetching())
 			.put(authActions.initialize())
 			.run()
